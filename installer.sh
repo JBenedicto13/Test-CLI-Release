@@ -46,6 +46,8 @@ ARCH_NAME=$(uname -m)
 if [ "$OS_NAME" == "linux" ]; then
     ENGINE_BINARY_FILENAME="koneksi-engine-linux-amd64"
     CLI_BINARY_FILENAME="koneksi-cli-linux-amd64"
+    ENGINE_FINAL_NAME="koneksi"
+    CLI_FINAL_NAME="koneksi"
 elif [ "$OS_NAME" == "macos" ]; then
     if [ "$ARCH_NAME" == "arm64" ]; then
         ENGINE_BINARY_FILENAME="koneksi-engine-macos-arm64"
@@ -54,9 +56,13 @@ elif [ "$OS_NAME" == "macos" ]; then
         ENGINE_BINARY_FILENAME="koneksi-engine-macos-amd64"
         CLI_BINARY_FILENAME="koneksi-cli-macos-amd64"
     fi
+    ENGINE_FINAL_NAME="koneksi"
+    CLI_FINAL_NAME="koneksi"
 elif [ "$OS_NAME" == "windows" ]; then
     ENGINE_BINARY_FILENAME="koneksi-engine-windows-amd64.exe"
     CLI_BINARY_FILENAME="koneksi-cli-windows-amd64.exe"
+    ENGINE_FINAL_NAME="koneksi.exe"
+    CLI_FINAL_NAME="koneksi.exe"
 else
     echo "Unsupported operating system: $OS_NAME"
     exit 1
@@ -95,7 +101,12 @@ EOF
     # Download the Koneksi Engine binary
     curl -LO $ENGINE_REPO_URL/$ENGINE_LATEST_RELEASE/$ENGINE_BINARY_FILENAME
     chmod +x $ENGINE_BINARY_FILENAME
-    echo "Koneksi Engine binary downloaded successfully"
+    
+    # Rename the downloaded file to the final name
+    mv $ENGINE_BINARY_FILENAME $ENGINE_FINAL_NAME
+    chmod +x $ENGINE_FINAL_NAME
+    
+    echo "Koneksi Engine binary downloaded and renamed to '$ENGINE_FINAL_NAME' successfully"
     echo "Proceeding to CLI installation..."
 else
     echo "Invalid input, please enter y or n"
@@ -114,13 +125,18 @@ echo "Downloading the Koneksi CLI binary..."
 # Download the Koneksi CLI binary
 curl -LO $CLI_REPO_URL/$CLI_LATEST_RELEASE/$CLI_BINARY_FILENAME
 chmod +x $CLI_BINARY_FILENAME
-echo "Koneksi CLI binary downloaded successfully"
+
+# Rename the downloaded file to the final name
+mv $CLI_BINARY_FILENAME $CLI_FINAL_NAME
+chmod +x $CLI_FINAL_NAME
+
+echo "Koneksi CLI binary downloaded and renamed to '$CLI_FINAL_NAME' successfully"
 
 #Register CLI to System (Linux/macOS only)
 if [[ "$OS_NAME" == "linux" || "$OS_NAME" == "macos" ]]; then
     echo "Registering Koneksi CLI to System..."
     # Get the absolute path to the CLI binary
-    CLI_PATH=$(pwd)/$CLI_BINARY_FILENAME
+    CLI_PATH=$(pwd)/$CLI_FINAL_NAME
     sudo ln -sf "$CLI_PATH" /usr/local/bin/koneksi
     echo "Koneksi CLI registered to System successfully. Test by running 'koneksi --help'"
 else
@@ -128,8 +144,8 @@ else
 fi
 
 # Export the binary filenames so they can be used by other scripts
-export ENGINE_BINARY_FILENAME
-export CLI_BINARY_FILENAME
+export ENGINE_FINAL_NAME
+export CLI_FINAL_NAME
 
 echo ""
 echo "Installation completed successfully!"

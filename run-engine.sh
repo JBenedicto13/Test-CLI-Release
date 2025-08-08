@@ -28,19 +28,14 @@ case "$OS_NAME" in
 esac
 
 if [[ "$OS_NAME" == "linux" ]]; then
-    ENGINE_BINARY="koneksi-engine-linux-amd64"
-    CLI_BINARY="koneksi-cli-linux-amd64"
+    ENGINE_BINARY="koneksi"
+    CLI_BINARY="koneksi"
 elif [[ "$OS_NAME" == "macos" ]]; then
-    if [[ "$ARCH_NAME" == "arm64" ]]; then
-        ENGINE_BINARY="koneksi-engine-macos-arm64"
-        CLI_BINARY="koneksi-cli-macos-arm64"
-    else
-        ENGINE_BINARY="koneksi-engine-macos-amd64"
-        CLI_BINARY="koneksi-cli-macos-amd64"
-    fi
+    ENGINE_BINARY="koneksi"
+    CLI_BINARY="koneksi"
 elif [[ "$OS_NAME" == "windows" ]]; then
-    ENGINE_BINARY="koneksi-engine-windows-amd64.exe"
-    CLI_BINARY="koneksi-cli-windows-amd64.exe"
+    ENGINE_BINARY="koneksi.exe"
+    CLI_BINARY="koneksi.exe"
 else
     echo "Unsupported operating system: $OS_NAME"
     exit 1
