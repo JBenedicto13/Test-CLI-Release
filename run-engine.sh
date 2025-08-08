@@ -67,8 +67,28 @@ if [[ "$OS_NAME" == "windows" ]]; then
     echo "Starting Koneksi CLI in a new terminal window..."
     powershell.exe -Command "Start-Process cmd -ArgumentList '/k', 'cd koneksi-cli && echo Running Koneksi CLI... && $CLI_BINARY' -WindowStyle Normal"
     
+
     echo "Both binaries are now running in separate terminal windows."
     echo "You can close this terminal when ready."
+    
+    echo ""
+    echo "=== MANUAL OPENING INSTRUCTIONS ==="
+    echo "If the terminals don't open automatically, you can open them manually:"
+    echo ""
+    echo "For Koneksi Engine:"
+    echo "1. Open a new Command Prompt or PowerShell window"
+    echo "2. Navigate to the koneksi-engine directory:"
+    echo "   cd $(pwd)/koneksi-engine"
+    echo "3. Run the engine binary:"
+    echo "   $ENGINE_BINARY"
+    echo ""
+    echo "For Koneksi CLI:"
+    echo "1. Open a new Command Prompt or PowerShell window"
+    echo "2. Navigate to the koneksi-cli directory:"
+    echo "   cd $(pwd)/koneksi-cli"
+    echo "3. Run the CLI binary:"
+    echo "   $CLI_BINARY"
+    echo "======================================"
 else
     # For Linux/macOS, use xterm or gnome-terminal
     echo "Running Koneksi Engine and CLI in separate terminals..."
@@ -117,4 +137,26 @@ else
     fi
     
     echo "Both binaries are now running in separate terminal windows."
+    
+    echo ""
+    echo "=== MANUAL OPENING INSTRUCTIONS ==="
+    echo "If the terminals don't open automatically, you can open them manually:"
+    echo ""
+    echo "For Koneksi Engine:"
+    echo "1. Open a new terminal window"
+    echo "2. Navigate to the koneksi-engine directory:"
+    echo "   cd $(pwd)/koneksi-engine"
+    echo "3. Run the engine binary:"
+    echo "   ./$ENGINE_BINARY"
+    echo ""
+    echo "For Koneksi CLI:"
+    echo "1. Open a new terminal window"
+    echo "2. Navigate to the koneksi-cli directory:"
+    echo "   cd $(pwd)/koneksi-cli"
+    echo "3. Run the CLI binary:"
+    echo "   ./$CLI_BINARY"
+    echo ""
+    echo "Alternatively, if the CLI was registered to your system, you can run:"
+    echo "   koneksi"
+    echo "======================================"
 fi
