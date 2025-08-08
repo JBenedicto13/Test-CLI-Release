@@ -2,3 +2,11 @@
 - You will be be prompted to enter whether you already have the Koneksi Engine installed or not, just enter yes `y` or no `n`.
 - At the end you will be prompted to enter whether to run the Koneksi Engine and Koneksi CLI, just enter yes `y` or no `n` based on your preference but if you choose yes, this will automatically run the engine and cli on separate terminals.
 - If you choose no, you can run the `run-engine.sh` later to run the engine and cli.
+
+How to run engine?
+`cd koneksi-engine`
+`./koneksi.exe`
+
+How to run CLI?
+`cd koneksi-cli`
+`./koneksi.exe`
